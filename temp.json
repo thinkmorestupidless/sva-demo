@@ -1,0 +1,3172 @@
+{
+  "akka": {
+    "actor": {
+      "additional-serialization-bindings": {
+        "akka.actor.ActorIdentity": "akka-misc",
+        "akka.actor.ActorInitializationException": "akka-misc",
+        "akka.actor.ActorKilledException": "akka-misc",
+        "akka.actor.ActorRef": "akka-misc",
+        "akka.actor.Identify": "akka-misc",
+        "akka.actor.IllegalActorStateException": "akka-misc",
+        "akka.actor.InvalidActorNameException": "akka-misc",
+        "akka.actor.InvalidMessageException": "akka-misc",
+        "akka.actor.Kill$": "akka-misc",
+        "akka.actor.LocalScope$": "akka-misc",
+        "akka.actor.PoisonPill$": "akka-misc",
+        "akka.actor.Status$Failure": "akka-misc",
+        "akka.actor.Status$Success": "akka-misc",
+        "akka.cluster.pubsub.DistributedPubSubMediator$Internal$SendToOneSubscriber": "akka-pubsub",
+        "akka.dispatch.sysmsg.SystemMessage": "akka-system-msg",
+        "akka.remote.RemoteScope": "akka-misc",
+        "akka.remote.RemoteWatcher$Heartbeat$": "akka-misc",
+        "akka.remote.RemoteWatcher$HeartbeatRsp": "akka-misc",
+        "akka.remote.routing.RemoteRouterConfig": "akka-misc",
+        "akka.routing.BalancingPool": "akka-misc",
+        "akka.routing.BroadcastGroup": "akka-misc",
+        "akka.routing.BroadcastPool": "akka-misc",
+        "akka.routing.DefaultResizer": "akka-misc",
+        "akka.routing.FromConfig": "akka-misc",
+        "akka.routing.RandomGroup": "akka-misc",
+        "akka.routing.RandomPool": "akka-misc",
+        "akka.routing.RoundRobinGroup": "akka-misc",
+        "akka.routing.RoundRobinPool": "akka-misc",
+        "akka.routing.ScatterGatherFirstCompletedGroup": "akka-misc",
+        "akka.routing.ScatterGatherFirstCompletedPool": "akka-misc",
+        "akka.routing.SmallestMailboxPool": "akka-misc",
+        "akka.routing.TailChoppingGroup": "akka-misc",
+        "akka.routing.TailChoppingPool": "akka-misc",
+        "akka.util.ByteString$ByteString1": "primitive-bytestring",
+        "akka.util.ByteString$ByteString1C": "primitive-bytestring",
+        "akka.util.ByteString$ByteStrings": "primitive-bytestring",
+        "com.typesafe.config.Config": "akka-misc",
+        "com.typesafe.config.impl.SimpleConfig": "akka-misc",
+        "java.lang.Integer": "primitive-int",
+        "java.lang.Long": "primitive-long",
+        "java.lang.String": "primitive-string",
+        "java.lang.Throwable": "java",
+        "scala.Int": "primitive-int",
+        "scala.Long": "primitive-long",
+        "scala.None$": "akka-misc",
+        "scala.Some": "akka-misc"
+      },
+      "allow-java-serialization": "on",
+      "creation-timeout": "20s",
+      "debug": {
+        "autoreceive": "off",
+        "event-stream": "off",
+        "fsm": "off",
+        "lifecycle": "on",
+        "receive": "off",
+        "router-misconfiguration": "off",
+        "unhandled": "on"
+      },
+      "default-blocking-io-dispatcher": {
+        "executor": "thread-pool-executor",
+        "thread-pool-executor": {
+          "fixed-pool-size": 16
+        },
+        "throughput": 1,
+        "type": "Dispatcher"
+      },
+      "default-dispatcher": {
+        "affinity-pool-executor": {
+          "fair-work-distribution": {
+            "threshold": 128
+          },
+          "idle-cpu-level": 5,
+          "parallelism-factor": 0.8,
+          "parallelism-max": 64,
+          "parallelism-min": 4,
+          "queue-selector": "akka.dispatch.affinity.FairDistributionHashCache",
+          "rejection-handler": "akka.dispatch.affinity.ThrowOnOverflowRejectionHandler",
+          "task-queue-size": 512
+        },
+        "attempt-teamwork": "on",
+        "default-executor": {
+          "fallback": "fork-join-executor"
+        },
+        "executor": "default-executor",
+        "fork-join-executor": {
+          "parallelism-factor": 3,
+          "parallelism-max": 64,
+          "parallelism-min": 8,
+          "task-peeking-mode": "FIFO"
+        },
+        "mailbox-requirement": "",
+        "shutdown-timeout": "1s",
+        "thread-pool-executor": {
+          "allow-core-timeout": "on",
+          "core-pool-size-factor": 3,
+          "core-pool-size-max": 64,
+          "core-pool-size-min": 8,
+          "fixed-pool-size": "off",
+          "keep-alive-time": "60s",
+          "max-pool-size-factor": 3,
+          "max-pool-size-max": 64,
+          "max-pool-size-min": 8,
+          "task-queue-size": -1,
+          "task-queue-type": "linked"
+        },
+        "throughput": 5,
+        "throughput-deadline-time": "0ms",
+        "type": "Dispatcher"
+      },
+      "default-mailbox": {
+        "mailbox-capacity": 1000,
+        "mailbox-push-timeout-time": "10s",
+        "mailbox-type": "akka.dispatch.UnboundedMailbox",
+        "stash-capacity": -1
+      },
+      "deployment": {
+        "/IO-DNS/async-dns": {
+          "mailbox": "unbounded",
+          "nr-of-instances": 1,
+          "router": "round-robin-pool"
+        },
+        "/IO-DNS/inet-address": {
+          "mailbox": "unbounded",
+          "nr-of-instances": 4,
+          "router": "consistent-hashing-pool"
+        },
+        "/IO-DNS/inet-address/*": {
+          "dispatcher": "akka.actor.default-blocking-io-dispatcher"
+        },
+        "/traffic-generator-actor": {
+          "dispatcher": "shopping-session-dispatcher"
+        },
+        "/traffic-generator-actor/**": {
+          "dispatcher": "shopping-session-dispatcher"
+        },
+        "default": {
+          "cluster": {
+            "allow-local-routees": "on",
+            "enabled": "off",
+            "max-nr-of-instances-per-node": 1,
+            "max-total-nr-of-instances": 10000,
+            "use-role": "",
+            "use-roles": []
+          },
+          "dispatcher": "",
+          "mailbox": "",
+          "nr-of-instances": 1,
+          "optimal-size-exploring-resizer": {
+            "action-interval": "5s",
+            "chance-of-exploration": 0.4,
+            "chance-of-ramping-down-when-full": 0.2,
+            "downsize-after-underutilized-for": "72h",
+            "downsize-ratio": 0.8,
+            "enabled": "off",
+            "explore-step-size": 0.1,
+            "lower-bound": 1,
+            "optimization-range": 16,
+            "upper-bound": 10,
+            "weight-of-latest-metric": 0.5
+          },
+          "remote": "",
+          "resizer": {
+            "backoff-rate": 0.1,
+            "backoff-threshold": 0.3,
+            "enabled": "off",
+            "lower-bound": 1,
+            "messages-per-resize": 10,
+            "pressure-threshold": 1,
+            "rampup-rate": 0.2,
+            "upper-bound": 10
+          },
+          "routees": {
+            "paths": []
+          },
+          "router": "from-code",
+          "tail-chopping-router": {
+            "interval": "10 milliseconds"
+          },
+          "target": {
+            "nodes": []
+          },
+          "virtual-nodes-factor": 10,
+          "within": "5 seconds"
+        }
+      },
+      "dsl": {
+        "default-timeout": "5s",
+        "inbox-size": 1000
+      },
+      "enable-additional-serialization-bindings": "on",
+      "guardian-supervisor-strategy": "akka.actor.DefaultSupervisorStrategy",
+      "java-serialization-disabled-additional-serialization-bindings": {
+        "akka.Done": "akka-misc",
+        "akka.NotUsed": "akka-misc",
+        "akka.actor.Address": "akka-misc",
+        "akka.remote.UniqueAddress": "akka-misc"
+      },
+      "mailbox": {
+        "bounded-control-aware-queue-based": {
+          "mailbox-type": "akka.dispatch.BoundedControlAwareMailbox"
+        },
+        "bounded-deque-based": {
+          "mailbox-type": "akka.dispatch.BoundedDequeBasedMailbox"
+        },
+        "bounded-queue-based": {
+          "mailbox-type": "akka.dispatch.BoundedMailbox"
+        },
+        "logger-queue": {
+          "mailbox-type": "akka.event.LoggerMailboxType"
+        },
+        "requirements": {
+          "akka.dispatch.BoundedControlAwareMessageQueueSemantics": "akka.actor.mailbox.bounded-control-aware-queue-based",
+          "akka.dispatch.BoundedDequeBasedMessageQueueSemantics": "akka.actor.mailbox.bounded-deque-based",
+          "akka.dispatch.BoundedMessageQueueSemantics": "akka.actor.mailbox.bounded-queue-based",
+          "akka.dispatch.ControlAwareMessageQueueSemantics": "akka.actor.mailbox.unbounded-control-aware-queue-based",
+          "akka.dispatch.DequeBasedMessageQueueSemantics": "akka.actor.mailbox.unbounded-deque-based",
+          "akka.dispatch.MultipleConsumerSemantics": "akka.actor.mailbox.unbounded-queue-based",
+          "akka.dispatch.UnboundedControlAwareMessageQueueSemantics": "akka.actor.mailbox.unbounded-control-aware-queue-based",
+          "akka.dispatch.UnboundedDequeBasedMessageQueueSemantics": "akka.actor.mailbox.unbounded-deque-based",
+          "akka.dispatch.UnboundedMessageQueueSemantics": "akka.actor.mailbox.unbounded-queue-based",
+          "akka.event.LoggerMessageQueueSemantics": "akka.actor.mailbox.logger-queue"
+        },
+        "unbounded-control-aware-queue-based": {
+          "mailbox-type": "akka.dispatch.UnboundedControlAwareMailbox"
+        },
+        "unbounded-deque-based": {
+          "mailbox-type": "akka.dispatch.UnboundedDequeBasedMailbox"
+        },
+        "unbounded-queue-based": {
+          "mailbox-type": "akka.dispatch.UnboundedMailbox"
+        }
+      },
+      "provider": "cluster",
+      "router": {
+        "type-mapping": {
+          "balancing-pool": "akka.routing.BalancingPool",
+          "broadcast-group": "akka.routing.BroadcastGroup",
+          "broadcast-pool": "akka.routing.BroadcastPool",
+          "consistent-hashing-group": "akka.routing.ConsistentHashingGroup",
+          "consistent-hashing-pool": "akka.routing.ConsistentHashingPool",
+          "from-code": "akka.routing.NoRouter",
+          "random-group": "akka.routing.RandomGroup",
+          "random-pool": "akka.routing.RandomPool",
+          "round-robin-group": "akka.routing.RoundRobinGroup",
+          "round-robin-pool": "akka.routing.RoundRobinPool",
+          "scatter-gather-group": "akka.routing.ScatterGatherFirstCompletedGroup",
+          "scatter-gather-pool": "akka.routing.ScatterGatherFirstCompletedPool",
+          "smallest-mailbox-pool": "akka.routing.SmallestMailboxPool",
+          "tail-chopping-group": "akka.routing.TailChoppingGroup",
+          "tail-chopping-pool": "akka.routing.TailChoppingPool"
+        }
+      },
+      "serialization-bindings": {
+        "[B": "bytes",
+        "akka.actor.ActorSelectionMessage": "akka-containers",
+        "akka.cluster.ClusterMessage": "akka-cluster",
+        "akka.cluster.client.ClusterClientMessage": "akka-cluster-client",
+        "akka.cluster.ddata.ReplicatedDataSerialization": "akka-replicated-data",
+        "akka.cluster.ddata.Replicator$ReplicatorMessage": "akka-data-replication",
+        "akka.cluster.pubsub.DistributedPubSubMessage": "akka-pubsub",
+        "akka.cluster.routing.ClusterRouterPool": "akka-cluster",
+        "akka.cluster.sharding.ClusterShardingSerializable": "akka-sharding",
+        "akka.cluster.singleton.ClusterSingletonMessage": "akka-singleton",
+        "akka.persistence.serialization.Message": "akka-persistence-message",
+        "akka.persistence.serialization.Snapshot": "akka-persistence-snapshot",
+        "akka.protobuf.GeneratedMessage": "proto",
+        "akka.remote.DaemonMsgCreate": "daemon-create",
+        "akka.remote.artery.ArteryMessage": "artery",
+        "akka.stream.SinkRef": "akka-stream-ref",
+        "akka.stream.SourceRef": "akka-stream-ref",
+        "akka.stream.impl.streamref.StreamRefsProtocol": "akka-stream-ref",
+        "com.google.protobuf.GeneratedMessage": "proto",
+        "java.io.Serializable": "java",
+        "java.util.Optional": "akka-misc"
+      },
+      "serialization-identifiers": {
+        "akka.cluster.client.protobuf.ClusterClientMessageSerializer": 15,
+        "akka.cluster.ddata.protobuf.ReplicatedDataSerializer": 11,
+        "akka.cluster.ddata.protobuf.ReplicatorMessageSerializer": 12,
+        "akka.cluster.protobuf.ClusterMessageSerializer": 5,
+        "akka.cluster.pubsub.protobuf.DistributedPubSubMessageSerializer": 9,
+        "akka.cluster.sharding.protobuf.ClusterShardingMessageSerializer": 13,
+        "akka.cluster.singleton.protobuf.ClusterSingletonMessageSerializer": 14,
+        "akka.persistence.serialization.MessageSerializer": 7,
+        "akka.persistence.serialization.SnapshotSerializer": 8,
+        "akka.remote.serialization.ArteryMessageSerializer": 17,
+        "akka.remote.serialization.ByteStringSerializer": 21,
+        "akka.remote.serialization.DaemonMsgCreateSerializer": 3,
+        "akka.remote.serialization.IntSerializer": 19,
+        "akka.remote.serialization.LongSerializer": 18,
+        "akka.remote.serialization.MessageContainerSerializer": 6,
+        "akka.remote.serialization.MiscMessageSerializer": 16,
+        "akka.remote.serialization.ProtobufSerializer": 2,
+        "akka.remote.serialization.StringSerializer": 20,
+        "akka.remote.serialization.SystemMessageSerializer": 22,
+        "akka.serialization.ByteArraySerializer": 4,
+        "akka.serialization.JavaSerializer": 1,
+        "akka.stream.serialization.StreamRefSerializer": 30
+      },
+      "serialize-creators": "off",
+      "serialize-messages": "off",
+      "serializers": {
+        "akka-cluster": "akka.cluster.protobuf.ClusterMessageSerializer",
+        "akka-cluster-client": "akka.cluster.client.protobuf.ClusterClientMessageSerializer",
+        "akka-containers": "akka.remote.serialization.MessageContainerSerializer",
+        "akka-data-replication": "akka.cluster.ddata.protobuf.ReplicatorMessageSerializer",
+        "akka-misc": "akka.remote.serialization.MiscMessageSerializer",
+        "akka-persistence-message": "akka.persistence.serialization.MessageSerializer",
+        "akka-persistence-snapshot": "akka.persistence.serialization.SnapshotSerializer",
+        "akka-pubsub": "akka.cluster.pubsub.protobuf.DistributedPubSubMessageSerializer",
+        "akka-replicated-data": "akka.cluster.ddata.protobuf.ReplicatedDataSerializer",
+        "akka-sharding": "akka.cluster.sharding.protobuf.ClusterShardingMessageSerializer",
+        "akka-singleton": "akka.cluster.singleton.protobuf.ClusterSingletonMessageSerializer",
+        "akka-stream-ref": "akka.stream.serialization.StreamRefSerializer",
+        "akka-system-msg": "akka.remote.serialization.SystemMessageSerializer",
+        "artery": "akka.remote.serialization.ArteryMessageSerializer",
+        "bytes": "akka.serialization.ByteArraySerializer",
+        "daemon-create": "akka.remote.serialization.DaemonMsgCreateSerializer",
+        "java": "akka.serialization.JavaSerializer",
+        "primitive-bytestring": "akka.remote.serialization.ByteStringSerializer",
+        "primitive-int": "akka.remote.serialization.IntSerializer",
+        "primitive-long": "akka.remote.serialization.LongSerializer",
+        "primitive-string": "akka.remote.serialization.StringSerializer",
+        "proto": "akka.remote.serialization.ProtobufSerializer"
+      },
+      "typed": {
+        "timeout": "5s"
+      },
+      "unstarted-push-timeout": "10s",
+      "warn-about-java-serializer-usage": "on",
+      "warn-on-no-serialization-verification": "on"
+    },
+    "cluster": {
+      "allow-weakly-up-members": "on",
+      "auto-down-unreachable-after": "off",
+      "client": {
+        "acceptable-heartbeat-pause": "13s",
+        "buffer-size": 1000,
+        "establishing-get-contacts-interval": "3s",
+        "heartbeat-interval": "2s",
+        "initial-contacts": [],
+        "receptionist": {
+          "acceptable-heartbeat-pause": "13s",
+          "failure-detection-interval": "2s",
+          "heartbeat-interval": "2s",
+          "name": "receptionist",
+          "number-of-contacts": 3,
+          "response-tunnel-receive-timeout": "30s",
+          "role": "",
+          "use-dispatcher": ""
+        },
+        "reconnect-timeout": "off",
+        "refresh-contacts-interval": "60s"
+      },
+      "configuration-compatibility-check": {
+        "checkers": {
+          "akka-cluster": "akka.cluster.JoinConfigCompatCheckCluster",
+          "akka-cluster-sharding": "akka.cluster.sharding.JoinConfigCompatCheckSharding"
+        },
+        "enforce-on-join": "on",
+        "sensitive-config-paths": {
+          "akka": [
+            "user.home",
+            "user.name",
+            "user.dir",
+            "socksNonProxyHosts",
+            "http.nonProxyHosts",
+            "ftp.nonProxyHosts",
+            "akka.remote.secure-cookie",
+            "akka.remote.netty.ssl.security",
+            "akka.remote.artery.ssl"
+          ]
+        }
+      },
+      "debug": {
+        "verbose-gossip-logging": "off",
+        "verbose-heartbeat-logging": "off"
+      },
+      "distributed-data": {
+        "delta-crdt": {
+          "enabled": "on",
+          "max-delta-size": 200
+        },
+        "durable": {
+          "keys": [],
+          "lmdb": {
+            "dir": "ddata",
+            "map-size": "100 MiB",
+            "write-behind-interval": "off"
+          },
+          "pinned-store": {
+            "executor": "thread-pool-executor",
+            "type": "PinnedDispatcher"
+          },
+          "pruning-marker-time-to-live": "10 d",
+          "store-actor-class": "akka.cluster.ddata.LmdbDurableStore",
+          "use-dispatcher": "akka.cluster.distributed-data.durable.pinned-store"
+        },
+        "gossip-interval": "2 s",
+        "max-delta-elements": 1000,
+        "max-pruning-dissemination": "300 s",
+        "name": "ddataReplicator",
+        "notify-subscribers-interval": "500 ms",
+        "pruning-interval": "120 s",
+        "pruning-marker-time-to-live": "6 h",
+        "role": "",
+        "serializer-cache-time-to-live": "10s",
+        "use-dispatcher": ""
+      },
+      "down-removal-margin": "off",
+      "downing-provider-class": "",
+      "failure-detector": {
+        "acceptable-heartbeat-pause": "3 s",
+        "expected-response-after": "1 s",
+        "heartbeat-interval": "1 s",
+        "implementation-class": "akka.remote.PhiAccrualFailureDetector",
+        "max-sample-size": 1000,
+        "min-std-deviation": "100 ms",
+        "monitored-by-nr-of-members": 5,
+        "threshold": 8
+      },
+      "gossip-different-view-probability": 0.8,
+      "gossip-interval": "1s",
+      "gossip-time-to-live": "2s",
+      "jmx": {
+        "enabled": "on",
+        "multi-mbeans-in-same-jvm": "off"
+      },
+      "leader-actions-interval": "1s",
+      "log-info": "on",
+      "min-nr-of-members": 1,
+      "multi-data-center": {
+        "cross-data-center-connections": 5,
+        "cross-data-center-gossip-probability": 0.2,
+        "failure-detector": {
+          "acceptable-heartbeat-pause": "10 s",
+          "expected-response-after": "1 s",
+          "heartbeat-interval": "3 s",
+          "implementation-class": "akka.remote.DeadlineFailureDetector"
+        },
+        "self-data-center": "default"
+      },
+      "periodic-tasks-initial-delay": "1s",
+      "prune-gossip-tombstones-after": "24h",
+      "pub-sub": {
+        "gossip-interval": "1s",
+        "max-delta-elements": 3000,
+        "name": "distributedPubSubMediator",
+        "removed-time-to-live": "120s",
+        "role": "",
+        "routing-logic": "random",
+        "send-to-dead-letters-when-no-subscribers": "on",
+        "use-dispatcher": ""
+      },
+      "publish-stats-interval": "off",
+      "quarantine-removed-node-after": "5s",
+      "reduce-gossip-different-view-probability": 400,
+      "retry-unsuccessful-join-after": "10s",
+      "role": {},
+      "roles": [],
+      "run-coordinated-shutdown-when-down": "on",
+      "scheduler": {
+        "tick-duration": "33ms",
+        "ticks-per-wheel": 512
+      },
+      "seed-node-timeout": "5s",
+      "seed-nodes": [
+        "akka.tcp://IOTApp@localhost:2551"
+      ],
+      "sharding": {
+        "buffer-size": 100000,
+        "coordinator-failure-backoff": "5 s",
+        "coordinator-singleton": {
+          "hand-over-retry-interval": "1s",
+          "min-number-of-hand-over-retries": 10,
+          "role": "",
+          "singleton-name": "singleton"
+        },
+        "distributed-data": {
+          "delta-crdt": {
+            "enabled": "on",
+            "max-delta-size": 200
+          },
+          "durable": {
+            "keys": [
+              "shard-*"
+            ],
+            "lmdb": {
+              "dir": "ddata",
+              "map-size": "100 MiB",
+              "write-behind-interval": "off"
+            },
+            "pinned-store": {
+              "executor": "thread-pool-executor",
+              "type": "PinnedDispatcher"
+            },
+            "pruning-marker-time-to-live": "10 d",
+            "store-actor-class": "akka.cluster.ddata.LmdbDurableStore",
+            "use-dispatcher": "akka.cluster.distributed-data.durable.pinned-store"
+          },
+          "gossip-interval": "2 s",
+          "majority-min-cap": 5,
+          "max-delta-elements": 5,
+          "max-pruning-dissemination": "300 s",
+          "name": "ddataReplicator",
+          "notify-subscribers-interval": "500 ms",
+          "pruning-interval": "120 s",
+          "pruning-marker-time-to-live": "6 h",
+          "role": "",
+          "serializer-cache-time-to-live": "10s",
+          "use-dispatcher": ""
+        },
+        "entity-recovery-constant-rate-strategy": {
+          "frequency": "100 ms",
+          "number-of-entities": 5
+        },
+        "entity-recovery-strategy": "all",
+        "entity-restart-backoff": "10 s",
+        "guardian-name": "sharding",
+        "handoff-timeout": "60 s",
+        "journal-plugin-id": "",
+        "keep-nr-of-batches": 2,
+        "least-shard-allocation-strategy": {
+          "max-simultaneous-rebalance": 3,
+          "rebalance-threshold": 10
+        },
+        "rebalance-interval": "10 s",
+        "remember-entities": "off",
+        "retry-interval": "2 s",
+        "role": "",
+        "shard-failure-backoff": "10 s",
+        "shard-start-timeout": "10 s",
+        "snapshot-after": 1000,
+        "snapshot-plugin-id": "",
+        "state-store-mode": "ddata",
+        "updating-state-timeout": "5 s",
+        "use-dispatcher": "",
+        "waiting-for-state-timeout": "5 s"
+      },
+      "shutdown-after-unsuccessful-join-seed-nodes": "off",
+      "singleton": {
+        "hand-over-retry-interval": "1s",
+        "min-number-of-hand-over-retries": 10,
+        "role": "",
+        "singleton-name": "singleton"
+      },
+      "singleton-proxy": {
+        "buffer-size": 1000,
+        "role": "",
+        "singleton-identification-interval": "1s",
+        "singleton-name": "singleton"
+      },
+      "split-brain-resolver": {
+        "active-strategy": "off",
+        "keep-majority": {
+          "role": ""
+        },
+        "keep-oldest": {
+          "down-if-alone": "on",
+          "role": ""
+        },
+        "keep-referee": {
+          "address": "",
+          "down-all-if-less-than-nodes": 1
+        },
+        "stable-after": "20s",
+        "static-quorum": {
+          "quorum-size": "undefined",
+          "role": ""
+        }
+      },
+      "unreachable-nodes-reaper-interval": "1s",
+      "use-dispatcher": ""
+    },
+    "coordinated-shutdown": {
+      "default-phase-timeout": "5 s",
+      "exit-code": 0,
+      "exit-jvm": "off",
+      "phases": {
+        "actor-system-terminate": {
+          "depends-on": [
+            "before-actor-system-terminate"
+          ],
+          "timeout": "10 s"
+        },
+        "before-actor-system-terminate": {
+          "depends-on": [
+            "cluster-shutdown"
+          ]
+        },
+        "before-cluster-shutdown": {
+          "depends-on": [
+            "service-stop"
+          ]
+        },
+        "before-service-unbind": {},
+        "cluster-exiting": {
+          "depends-on": [
+            "cluster-leave"
+          ],
+          "timeout": "10 s"
+        },
+        "cluster-exiting-done": {
+          "depends-on": [
+            "cluster-exiting"
+          ]
+        },
+        "cluster-leave": {
+          "depends-on": [
+            "cluster-sharding-shutdown-region"
+          ]
+        },
+        "cluster-sharding-shutdown-region": {
+          "depends-on": [
+            "before-cluster-shutdown"
+          ],
+          "timeout": "10 s"
+        },
+        "cluster-shutdown": {
+          "depends-on": [
+            "cluster-exiting-done"
+          ]
+        },
+        "service-requests-done": {
+          "depends-on": [
+            "service-unbind"
+          ]
+        },
+        "service-stop": {
+          "depends-on": [
+            "service-requests-done"
+          ]
+        },
+        "service-unbind": {
+          "depends-on": [
+            "before-service-unbind"
+          ]
+        }
+      },
+      "reason-overrides": {
+        "akka.actor.CoordinatedShutdown$ClusterDowningReason$": {
+          "exit-code": -1
+        }
+      },
+      "run-by-jvm-shutdown-hook": "on",
+      "terminate-actor-system": "on"
+    },
+    "daemonic": "off",
+    "discovery": {
+      "kubernetes-api": {
+        "api-ca-path": "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt",
+        "api-service-host-env-name": "KUBERNETES_SERVICE_HOST",
+        "api-service-port-env-name": "KUBERNETES_SERVICE_PORT",
+        "api-token-path": "/var/run/secrets/kubernetes.io/serviceaccount/token",
+        "class": "akka.discovery.kubernetes.KubernetesApiSimpleServiceDiscovery",
+        "pod-domain": "cluster.local",
+        "pod-label-selector": "app=%s",
+        "pod-namespace": "default",
+        "pod-port-name": "akka-mgmt-http"
+      },
+      "marathon-api": {
+        "app-api-url": "http://marathon.mesos:8080/v2/apps",
+        "app-label-query": "ACTOR_SYSTEM_NAME==%s",
+        "app-port-name": "akkamgmthttp",
+        "class": "akka.discovery.marathon.MarathonApiSimpleServiceDiscovery"
+      },
+      "method": "<method>"
+    },
+    "extensions": [],
+    "home": "",
+    "http": {
+      "client": {
+        "connecting-timeout": "10 s",
+        "idle-timeout": "60 s",
+        "log-unencrypted-network-bytes": "off",
+        "parsing": {},
+        "proxy": {
+          "https": {
+            "host": "",
+            "port": 443
+          }
+        },
+        "request-header-size-hint": 512,
+        "socket-options": {
+          "so-receive-buffer-size": "undefined",
+          "so-reuse-address": "undefined",
+          "so-send-buffer-size": "undefined",
+          "so-traffic-class": "undefined",
+          "tcp-keep-alive": "undefined",
+          "tcp-no-delay": "undefined",
+          "tcp-oob-inline": "undefined"
+        },
+        "user-agent-header": "akka-http/10.1.3",
+        "websocket": {
+          "periodic-keep-alive-max-idle": "infinite",
+          "periodic-keep-alive-mode": "ping"
+        }
+      },
+      "host-connection-pool": {
+        "client": {},
+        "idle-timeout": "30 s",
+        "max-connections": 4,
+        "max-open-requests": 32,
+        "max-retries": 5,
+        "min-connections": 0,
+        "pipelining-limit": 1,
+        "pool-implementation": "new",
+        "response-entity-subscription-timeout": "1.second"
+      },
+      "instrumentations": [
+        "cinnamon.akka.http.CinnamonAkkaHttpInstrumentation"
+      ],
+      "parsing": {
+        "cookie-parsing-mode": "rfc6265",
+        "error-logging-verbosity": "full",
+        "header-cache": {
+          "Content-MD5": 0,
+          "Date": 0,
+          "If-Match": 0,
+          "If-Modified-Since": 0,
+          "If-None-Match": 0,
+          "If-Range": 0,
+          "If-Unmodified-Since": 0,
+          "User-Agent": 32,
+          "default": 12
+        },
+        "ignore-illegal-header-for": [],
+        "illegal-header-warnings": "on",
+        "illegal-response-header-value-processing-mode": "error",
+        "max-chunk-ext-length": 256,
+        "max-chunk-size": "1m",
+        "max-content-length": "8m",
+        "max-header-count": 64,
+        "max-header-name-length": 64,
+        "max-header-value-length": "8k",
+        "max-method-length": 16,
+        "max-response-reason-length": 64,
+        "max-uri-length": "2k",
+        "modeled-header-parsing": "on",
+        "tls-session-info-header": "off",
+        "uri-parsing-mode": "strict"
+      },
+      "routing": {
+        "decode-max-bytes-per-chunk": "1m",
+        "file-get-conditional": "on",
+        "file-io-dispatcher": "akka.stream.default-blocking-io-dispatcher",
+        "range-coalescing-threshold": 80,
+        "range-count-limit": 16,
+        "render-vanity-footer": "yes",
+        "verbose-error-messages": "off"
+      },
+      "server": {
+        "backlog": 100,
+        "bind-timeout": "1s",
+        "default-host-header": "",
+        "default-http-port": 80,
+        "default-https-port": 443,
+        "http2": {
+          "incoming-connection-level-buffer-size": "10 MB",
+          "incoming-stream-level-buffer-size": "512kB",
+          "request-entity-chunk-size": "65536 b"
+        },
+        "idle-timeout": "60 s",
+        "linger-timeout": "1 min",
+        "log-unencrypted-network-bytes": "off",
+        "max-connections": 1024,
+        "parsing": {},
+        "pipelining-limit": 16,
+        "preview": {
+          "enable-http2": "off"
+        },
+        "raw-request-uri-header": "off",
+        "remote-address-header": "off",
+        "request-timeout": "20 s",
+        "response-header-size-hint": 512,
+        "server-header": "akka-http/10.1.3",
+        "socket-options": {
+          "so-receive-buffer-size": "undefined",
+          "so-reuse-address": "undefined",
+          "so-send-buffer-size": "undefined",
+          "so-traffic-class": "undefined",
+          "tcp-keep-alive": "undefined",
+          "tcp-no-delay": "undefined",
+          "tcp-oob-inline": "undefined"
+        },
+        "termination-deadline-exceeded-response": {
+          "status": 503
+        },
+        "transparent-head-requests": "on",
+        "verbose-error-messages": "off",
+        "websocket": {
+          "periodic-keep-alive-max-idle": "infinite",
+          "periodic-keep-alive-mode": "ping"
+        }
+      },
+      "version": "10.1.3"
+    },
+    "instrumentations": [
+      "cinnamon.akka.CinnamonActorInstrumentation"
+    ],
+    "io": {
+      "dns": {
+        "async-dns": {
+          "cache-cleanup-interval": "120s",
+          "max-positive-ttl": "1d",
+          "min-positive-ttl": "0s",
+          "nameservers": "default",
+          "negative-ttl": "10s",
+          "provider-object": "akka.io.dns.internal.AsyncDnsProvider",
+          "request-ttl": "5s",
+          "resolv-conf": "off",
+          "resolve-ipv4": true,
+          "resolve-ipv6": true,
+          "resolve-srv": false,
+          "resolve-timeout": "5s"
+        },
+        "dispatcher": "akka.actor.default-dispatcher",
+        "inet-address": {
+          "cache-cleanup-interval": "120s",
+          "negative-ttl": "default",
+          "positive-ttl": "default",
+          "provider-object": "akka.io.InetAddressDnsProvider"
+        },
+        "resolver": "inet-address"
+      },
+      "pinned-dispatcher": {
+        "executor": "thread-pool-executor",
+        "thread-pool-executor": {
+          "allow-core-timeout": "off"
+        },
+        "type": "PinnedDispatcher"
+      },
+      "tcp": {
+        "batch-accept-limit": 10,
+        "direct-buffer-pool-limit": 1000,
+        "direct-buffer-size": "128 KiB",
+        "file-io-dispatcher": "akka.actor.default-blocking-io-dispatcher",
+        "file-io-transferTo-limit": "512 KiB",
+        "finish-connect-retries": 5,
+        "management-dispatcher": "akka.actor.default-dispatcher",
+        "max-channels": 256000,
+        "max-received-message-size": "unlimited",
+        "nr-of-selectors": 1,
+        "register-timeout": "5s",
+        "selector-association-retries": 10,
+        "selector-dispatcher": "akka.io.pinned-dispatcher",
+        "trace-logging": "off",
+        "windows-connection-abort-workaround-enabled": "off",
+        "worker-dispatcher": "akka.actor.default-dispatcher"
+      },
+      "udp": {
+        "direct-buffer-pool-limit": 1000,
+        "direct-buffer-size": "128 KiB",
+        "management-dispatcher": "akka.actor.default-dispatcher",
+        "max-channels": 4096,
+        "nr-of-selectors": 1,
+        "receive-throughput": 3,
+        "select-timeout": "infinite",
+        "selector-association-retries": 10,
+        "selector-dispatcher": "akka.io.pinned-dispatcher",
+        "trace-logging": "off",
+        "worker-dispatcher": "akka.actor.default-dispatcher"
+      },
+      "udp-connected": {
+        "direct-buffer-pool-limit": 1000,
+        "direct-buffer-size": "128 KiB",
+        "management-dispatcher": "akka.actor.default-dispatcher",
+        "max-channels": 4096,
+        "nr-of-selectors": 1,
+        "receive-throughput": 3,
+        "select-timeout": "infinite",
+        "selector-association-retries": 10,
+        "selector-dispatcher": "akka.io.pinned-dispatcher",
+        "trace-logging": "off",
+        "worker-dispatcher": "akka.actor.default-dispatcher"
+      }
+    },
+    "jvm-exit-on-fatal-error": "on",
+    "jvm-shutdown-hooks": "on",
+    "library-extensions": [
+      "akka.serialization.SerializationExtension"
+    ],
+    "log-config-on-start": "off",
+    "log-dead-letters": 10,
+    "log-dead-letters-during-shutdown": "on",
+    "logger-startup-timeout": "5s",
+    "loggers": [
+      "akka.event.slf4j.Slf4jLogger"
+    ],
+    "loggers-dispatcher": "akka.actor.default-dispatcher",
+    "logging-filter": "akka.event.DefaultLoggingFilter",
+    "loglevel": "DEBUG",
+    "management": {
+      "cluster": {
+        "bootstrap": {
+          "contact-point": {
+            "fallback-port": 8558,
+            "probe-interval": "1 second",
+            "probe-interval-jitter": 0.2,
+            "probing-failure-timeout": "3 seconds"
+          },
+          "contact-point-discovery": {
+            "discovery-method": "akka.discovery",
+            "effective-name": "<effective-name>",
+            "exponential-backoff-max": "15 seconds",
+            "exponential-backoff-random-factor": 0.2,
+            "interval": "1 second",
+            "required-contact-point-nr": 2,
+            "resolve-timeout": "3 seconds",
+            "service-name": "<service-name>",
+            "service-namespace": "<service-namespace>",
+            "stable-margin": "5 seconds"
+          },
+          "form-new-cluster": "on",
+          "join-decider": {
+            "class": "akka.management.cluster.bootstrap.LowestAddressJoinDecider"
+          }
+        }
+      },
+      "http": {
+        "base-path": "",
+        "bind-hostname": "",
+        "bind-port": "",
+        "hostname": "<hostname>",
+        "port": 8558,
+        "route-providers": [
+          "akka.management.cluster.bootstrap.ClusterBootstrap$"
+        ]
+      }
+    },
+    "persistence": {
+      "at-least-once-delivery": {
+        "max-unconfirmed-messages": 100000,
+        "redeliver-interval": "5s",
+        "redelivery-burst-limit": 10000,
+        "warn-after-number-of-unconfirmed-attempts": 5
+      },
+      "dispatchers": {
+        "default-plugin-dispatcher": {
+          "executor": "thread-pool-executor",
+          "type": "PinnedDispatcher"
+        },
+        "default-replay-dispatcher": {
+          "executor": "fork-join-executor",
+          "fork-join-executor": {
+            "parallelism-max": 8,
+            "parallelism-min": 2
+          },
+          "type": "Dispatcher"
+        },
+        "default-stream-dispatcher": {
+          "executor": "fork-join-executor",
+          "fork-join-executor": {
+            "parallelism-max": 8,
+            "parallelism-min": 2
+          },
+          "type": "Dispatcher"
+        }
+      },
+      "fsm": {
+        "snapshot-after": "off"
+      },
+      "internal-stash-overflow-strategy": "akka.persistence.ThrowExceptionConfigurator",
+      "journal": {
+        "auto-start-journals": [],
+        "inmem": {
+          "class": "akka.persistence.journal.inmem.InmemJournal",
+          "plugin-dispatcher": "akka.actor.default-dispatcher"
+        },
+        "leveldb": {
+          "checksum": "off",
+          "class": "akka.persistence.journal.leveldb.LeveldbJournal",
+          "compaction-intervals": {},
+          "dir": "journal",
+          "fsync": "on",
+          "native": "on",
+          "plugin-dispatcher": "akka.persistence.dispatchers.default-plugin-dispatcher",
+          "replay-dispatcher": "akka.persistence.dispatchers.default-replay-dispatcher"
+        },
+        "leveldb-shared": {
+          "class": "akka.persistence.journal.leveldb.SharedLeveldbJournal",
+          "plugin-dispatcher": "akka.actor.default-dispatcher",
+          "store": {
+            "checksum": "off",
+            "compaction-intervals": {},
+            "dir": "journal",
+            "fsync": "on",
+            "native": "on",
+            "replay-dispatcher": "akka.persistence.dispatchers.default-replay-dispatcher",
+            "store-dispatcher": "akka.persistence.dispatchers.default-plugin-dispatcher"
+          },
+          "timeout": "10s"
+        },
+        "plugin": "",
+        "proxy": {
+          "class": "akka.persistence.journal.PersistencePluginProxy",
+          "init-timeout": "10s",
+          "plugin-dispatcher": "akka.actor.default-dispatcher",
+          "start-target-journal": "off",
+          "target-journal-address": "",
+          "target-journal-plugin": ""
+        }
+      },
+      "journal-plugin-fallback": {
+        "circuit-breaker": {
+          "call-timeout": "10s",
+          "max-failures": 10,
+          "reset-timeout": "30s"
+        },
+        "class": "",
+        "max-message-batch-size": 200,
+        "plugin-dispatcher": "akka.persistence.dispatchers.default-plugin-dispatcher",
+        "recovery-event-timeout": "30s",
+        "replay-dispatcher": "akka.persistence.dispatchers.default-replay-dispatcher",
+        "replay-filter": {
+          "debug": "off",
+          "max-old-writers": 10,
+          "mode": "repair-by-discard-old",
+          "window-size": 100
+        }
+      },
+      "max-concurrent-recoveries": 50,
+      "no-snapshot-store": {
+        "class": "akka.persistence.snapshot.NoSnapshotStore"
+      },
+      "snapshot-store": {
+        "auto-start-snapshot-stores": [],
+        "local": {
+          "class": "akka.persistence.snapshot.local.LocalSnapshotStore",
+          "dir": "snapshots",
+          "max-load-attempts": 3,
+          "plugin-dispatcher": "akka.persistence.dispatchers.default-plugin-dispatcher",
+          "stream-dispatcher": "akka.persistence.dispatchers.default-stream-dispatcher"
+        },
+        "plugin": "",
+        "proxy": {
+          "class": "akka.persistence.journal.PersistencePluginProxy",
+          "init-timeout": "10s",
+          "plugin-dispatcher": "akka.actor.default-dispatcher",
+          "start-target-snapshot-store": "off",
+          "target-snapshot-store-address": "",
+          "target-snapshot-store-plugin": ""
+        }
+      },
+      "snapshot-store-plugin-fallback": {
+        "circuit-breaker": {
+          "call-timeout": "20s",
+          "max-failures": 5,
+          "reset-timeout": "60s"
+        },
+        "class": "",
+        "plugin-dispatcher": "akka.persistence.dispatchers.default-plugin-dispatcher"
+      }
+    },
+    "remote": {
+      "adapters": {
+        "gremlin": "akka.remote.transport.FailureInjectorProvider",
+        "trttl": "akka.remote.transport.ThrottlerProvider"
+      },
+      "artery": {
+        "advanced": {
+          "aeron-dir": "",
+          "buffer-pool-size": 128,
+          "client-liveness-timeout": "20 seconds",
+          "compression": {
+            "actor-refs": {
+              "advertisement-interval": "1 minute",
+              "max": 256
+            },
+            "manifests": {
+              "advertisement-interval": "1 minute",
+              "max": 256
+            }
+          },
+          "connection-timeout": "5 seconds",
+          "delete-aeron-dir": "yes",
+          "driver-timeout": "20 seconds",
+          "embedded-media-driver": "on",
+          "flight-recorder": {
+            "destination": "",
+            "enabled": "off"
+          },
+          "give-up-message-after": "60 seconds",
+          "give-up-system-message-after": "6 hours",
+          "handshake-retry-interval": "1 second",
+          "handshake-timeout": "20 seconds",
+          "idle-cpu-level": 5,
+          "image-liveness-timeout": "10 seconds",
+          "inbound-lanes": 4,
+          "inbound-max-restarts": 5,
+          "inbound-restart-timeout": "5 seconds",
+          "inject-handshake-interval": "1 second",
+          "instruments": [],
+          "large-buffer-pool-size": 32,
+          "materializer": {
+            "auto-fusing": "on",
+            "blocking-io-dispatcher": "akka.stream.default-blocking-io-dispatcher",
+            "debug": {
+              "fuzzing-mode": "off"
+            },
+            "debug-logging": "off",
+            "dispatcher": "",
+            "initial-input-buffer-size": 4,
+            "io": {
+              "tcp": {
+                "write-buffer-size": "16 KiB"
+              }
+            },
+            "max-fixed-buffer-size": 1000000000,
+            "max-input-buffer-size": 16,
+            "output-burst-limit": 1000,
+            "stream-ref": {
+              "buffer-capacity": 32,
+              "demand-redelivery-interval": "1 second",
+              "subscription-timeout": "30 seconds"
+            },
+            "subscription-timeout": {
+              "mode": "cancel",
+              "timeout": "5s"
+            },
+            "sync-processing-limit": 1000
+          },
+          "maximum-frame-size": "256 KiB",
+          "maximum-large-frame-size": "2 MiB",
+          "outbound-control-queue-size": 3072,
+          "outbound-lanes": 1,
+          "outbound-large-message-queue-size": 256,
+          "outbound-max-restarts": 5,
+          "outbound-message-queue-size": 3072,
+          "outbound-restart-backoff": "1 second",
+          "outbound-restart-timeout": "5 seconds",
+          "quarantine-idle-outbound-after": "6 hours",
+          "remove-quarantined-association-after": "1 h",
+          "shutdown-flush-timeout": "1 second",
+          "stop-idle-outbound-after": "5 minutes",
+          "stop-quarantined-after-idle": "3 seconds",
+          "system-message-buffer-size": 20000,
+          "system-message-resend-interval": "1 second",
+          "test-mode": "off",
+          "use-control-stream-dispatcher": "",
+          "use-dispatcher": "akka.remote.default-remote-dispatcher"
+        },
+        "bind": {
+          "bind-timeout": "3s",
+          "hostname": "",
+          "port": ""
+        },
+        "canonical": {
+          "hostname": "<getHostAddress>",
+          "port": 25520
+        },
+        "enabled": "off",
+        "large-message-destinations": [],
+        "log-aeron-counters": false,
+        "log-received-messages": "off",
+        "log-sent-messages": "off",
+        "ssl": {
+          "config-ssl-engine": {
+            "enabled-algorithms": [
+              "TLS_RSA_WITH_AES_128_CBC_SHA"
+            ],
+            "hostname-verification": "off",
+            "key-password": "changeme",
+            "key-store": "keystore",
+            "key-store-password": "changeme",
+            "protocol": "TLSv1.2",
+            "random-number-generator": "",
+            "require-mutual-authentication": "on",
+            "trust-store": "truststore",
+            "trust-store-password": "changeme"
+          },
+          "ssl-engine-provider": "akka.remote.artery.tcp.ConfigSSLEngineProvider"
+        },
+        "transport": "aeron-udp",
+        "trusted-selection-paths": [],
+        "untrusted-mode": "off"
+      },
+      "backoff-interval": "5 ms",
+      "backoff-remote-dispatcher": {
+        "executor": "fork-join-executor",
+        "fork-join-executor": {
+          "parallelism-max": 2,
+          "parallelism-min": 2
+        },
+        "type": "Dispatcher"
+      },
+      "command-ack-timeout": "30 s",
+      "default-remote-dispatcher": {
+        "executor": "fork-join-executor",
+        "fork-join-executor": {
+          "parallelism-factor": 0.5,
+          "parallelism-max": 16,
+          "parallelism-min": 2
+        },
+        "throughput": 10,
+        "type": "Dispatcher"
+      },
+      "deployment": {
+        "enable-whitelist": "off",
+        "whitelist": []
+      },
+      "enabled-transports": [
+        "akka.remote.netty.tcp"
+      ],
+      "flush-wait-on-shutdown": "2 s",
+      "gremlin": {
+        "debug": "off"
+      },
+      "handshake-timeout": "15 s",
+      "initial-system-message-delivery-timeout": "3 m",
+      "log-buffer-size-exceeding": 50000,
+      "log-frame-size-exceeding": "off",
+      "log-received-messages": "off",
+      "log-remote-lifecycle-events": "off",
+      "log-sent-messages": "off",
+      "netty": {
+        "ssl": {
+          "applied-adapters": [],
+          "backlog": 4096,
+          "bind-hostname": "",
+          "bind-port": "",
+          "client-socket-worker-pool": {
+            "pool-size-factor": 1,
+            "pool-size-max": 2,
+            "pool-size-min": 2
+          },
+          "connection-timeout": "15 s",
+          "enable-ssl": true,
+          "hostname": "",
+          "maximum-frame-size": "128000b",
+          "port": 2552,
+          "receive-buffer-size": "256000b",
+          "security": {
+            "enabled-algorithms": [
+              "TLS_RSA_WITH_AES_128_CBC_SHA"
+            ],
+            "key-password": "changeme",
+            "key-store": "keystore",
+            "key-store-password": "changeme",
+            "protocol": "TLSv1.2",
+            "random-number-generator": "",
+            "require-mutual-authentication": "on",
+            "trust-store": "truststore",
+            "trust-store-password": "changeme"
+          },
+          "send-buffer-size": "256000b",
+          "server-socket-worker-pool": {
+            "pool-size-factor": 1,
+            "pool-size-max": 2,
+            "pool-size-min": 2
+          },
+          "ssl-engine-provider": "akka.remote.transport.netty.ConfigSSLEngineProvider",
+          "tcp-keepalive": "on",
+          "tcp-nodelay": "on",
+          "tcp-reuse-addr": "off-for-windows",
+          "transport-class": "akka.remote.transport.netty.NettyTransport",
+          "transport-protocol": "tcp",
+          "use-dispatcher-for-io": "",
+          "write-buffer-high-water-mark": "0b",
+          "write-buffer-low-water-mark": "0b"
+        },
+        "tcp": {
+          "applied-adapters": [],
+          "backlog": 4096,
+          "bind-hostname": "",
+          "bind-port": "",
+          "client-socket-worker-pool": {
+            "pool-size-factor": 1,
+            "pool-size-max": 2,
+            "pool-size-min": 2
+          },
+          "connection-timeout": "15 s",
+          "enable-ssl": false,
+          "hostname": "localhost",
+          "maximum-frame-size": "128000b",
+          "port": 2551,
+          "receive-buffer-size": "256000b",
+          "send-buffer-size": "256000b",
+          "server-socket-worker-pool": {
+            "pool-size-factor": 1,
+            "pool-size-max": 2,
+            "pool-size-min": 2
+          },
+          "tcp-keepalive": "on",
+          "tcp-nodelay": "on",
+          "tcp-reuse-addr": "off-for-windows",
+          "transport-class": "akka.remote.transport.netty.NettyTransport",
+          "transport-protocol": "tcp",
+          "use-dispatcher-for-io": "",
+          "write-buffer-high-water-mark": "0b",
+          "write-buffer-low-water-mark": "0b"
+        },
+        "udp": {
+          "applied-adapters": [],
+          "backlog": 4096,
+          "bind-hostname": "",
+          "bind-port": "",
+          "client-socket-worker-pool": {
+            "pool-size-factor": 1,
+            "pool-size-max": 2,
+            "pool-size-min": 2
+          },
+          "connection-timeout": "15 s",
+          "enable-ssl": false,
+          "hostname": "",
+          "maximum-frame-size": "128000b",
+          "port": 2552,
+          "receive-buffer-size": "256000b",
+          "send-buffer-size": "256000b",
+          "server-socket-worker-pool": {
+            "pool-size-factor": 1,
+            "pool-size-max": 2,
+            "pool-size-min": 2
+          },
+          "tcp-keepalive": "on",
+          "tcp-nodelay": "on",
+          "tcp-reuse-addr": "off-for-windows",
+          "transport-class": "akka.remote.transport.netty.NettyTransport",
+          "transport-protocol": "udp",
+          "use-dispatcher-for-io": "",
+          "write-buffer-high-water-mark": "0b",
+          "write-buffer-low-water-mark": "0b"
+        }
+      },
+      "prune-quarantine-marker-after": "5 d",
+      "quarantine-after-silence": "2 d",
+      "require-cookie": "off",
+      "resend-interval": "2 s",
+      "resend-limit": 200,
+      "retry-gate-closed-for": "5 s",
+      "secure-cookie": "",
+      "shutdown-timeout": "10 s",
+      "startup-timeout": "10 s",
+      "system-message-ack-piggyback-timeout": "0.3 s",
+      "system-message-buffer-size": 20000,
+      "transport-failure-detector": {
+        "acceptable-heartbeat-pause": "120 s",
+        "heartbeat-interval": "4 s",
+        "implementation-class": "akka.remote.DeadlineFailureDetector"
+      },
+      "trusted-selection-paths": [],
+      "untrusted-mode": "off",
+      "use-dispatcher": "akka.remote.default-remote-dispatcher",
+      "use-passive-connections": "on",
+      "watch-failure-detector": {
+        "acceptable-heartbeat-pause": "10 s",
+        "expected-response-after": "1 s",
+        "heartbeat-interval": "1 s",
+        "implementation-class": "akka.remote.PhiAccrualFailureDetector",
+        "max-sample-size": 200,
+        "min-std-deviation": "100 ms",
+        "threshold": 10,
+        "unreachable-nodes-reaper-interval": "1s"
+      }
+    },
+    "scheduler": {
+      "implementation": "akka.actor.LightArrayRevolverScheduler",
+      "shutdown-timeout": "5s",
+      "tick-duration": "10ms",
+      "ticks-per-wheel": 512
+    },
+    "ssl-config": {
+      "protocol": "TLSv1.2"
+    },
+    "stdout-loglevel": "WARNING",
+    "stream": {
+      "blocking-io-dispatcher": "akka.stream.default-blocking-io-dispatcher",
+      "default-blocking-io-dispatcher": {
+        "executor": "thread-pool-executor",
+        "thread-pool-executor": {
+          "fixed-pool-size": 16
+        },
+        "throughput": 1,
+        "type": "Dispatcher"
+      },
+      "materializer": {
+        "auto-fusing": "on",
+        "blocking-io-dispatcher": "akka.stream.default-blocking-io-dispatcher",
+        "debug": {
+          "fuzzing-mode": "off"
+        },
+        "debug-logging": "off",
+        "dispatcher": "",
+        "initial-input-buffer-size": 4,
+        "io": {
+          "tcp": {
+            "write-buffer-size": "16 KiB"
+          }
+        },
+        "max-fixed-buffer-size": 1000000000,
+        "max-input-buffer-size": 16,
+        "output-burst-limit": 1000,
+        "stream-ref": {
+          "buffer-capacity": 32,
+          "demand-redelivery-interval": "1 second",
+          "subscription-timeout": "30 seconds"
+        },
+        "subscription-timeout": {
+          "mode": "cancel",
+          "timeout": "5s"
+        },
+        "sync-processing-limit": 1000
+      }
+    },
+    "version": "2.5.14"
+  },
+  "awt": {
+    "toolkit": "sun.awt.X11.XToolkit"
+  },
+  "cinnamon": {
+    "akka": {
+      "actors": {
+        "/system//sharding/com.lightbend.esdemos.ShoppingCart/*": {
+          "report-by": "class"
+        },
+        "/user/*": {
+          "report-by": "class"
+        }
+      },
+      "cluster": {
+        "domain-events": "off",
+        "member-events": "off",
+        "node-metrics": "on",
+        "shard-region-info": "on",
+        "singleton-events": "off",
+        "split-brain-resolver-events": "off"
+      },
+      "dimensions": [
+        "actor-system",
+        "dispatcher"
+      ],
+      "dispatchers": {
+        "basic-information": {
+          "names": [
+            "*"
+          ]
+        },
+        "time-information": {
+          "names": [
+            "*"
+          ]
+        }
+      },
+      "http": {
+        "clients": {
+          "*:*": {
+            "paths": {
+              "*": {
+                "metrics": "on"
+              }
+            }
+          }
+        },
+        "host-connection-pool": {
+          "max-connections": 100,
+          "max-open-requests": 100
+        },
+        "meta": {
+          "descriptor": {
+            "client": {
+              "requests": {
+                "categories": [
+                  "Akka HTTP client metrics"
+                ],
+                "enabled": true,
+                "group-name": "metrics",
+                "hints": [],
+                "key": "http-client-requests",
+                "name": "Akka HTTP client requests",
+                "tags": {},
+                "unit-plural-suffix": "",
+                "unit-suffix": "",
+                "unit-type": "custom"
+              },
+              "service-response-time": {
+                "categories": [
+                  "Akka HTTP client metrics"
+                ],
+                "enabled": true,
+                "group-name": "metrics",
+                "hints": [],
+                "key": "http-client-service-response-time",
+                "name": "Akka HTTP client service response time",
+                "tags": {},
+                "unit-plural-suffix": "",
+                "unit-suffix": "",
+                "unit-type": "nanoseconds"
+              }
+            },
+            "client-pool": {
+              "connections": {
+                "categories": [
+                  "Akka HTTP client metrics"
+                ],
+                "enabled": true,
+                "group-name": "metrics",
+                "hints": [],
+                "key": "connections",
+                "name": "Akka HTTP client connections",
+                "tags": {},
+                "unit-plural-suffix": "connections",
+                "unit-suffix": "connection",
+                "unit-type": "custom"
+              }
+            },
+            "endpoint": {
+              "response-time": {
+                "categories": [
+                  "Akka HTTP server endpoint metrics"
+                ],
+                "enabled": true,
+                "group-name": "metrics",
+                "hints": [],
+                "key": "endpoint-response-time",
+                "name": "Outgoing endpoint response time",
+                "tags": {},
+                "unit-plural-suffix": "",
+                "unit-suffix": "",
+                "unit-type": "nanoseconds"
+              },
+              "responses": {
+                "categories": [
+                  "Akka HTTP server endpoint metrics"
+                ],
+                "enabled": true,
+                "group-name": "metrics",
+                "hints": [],
+                "key": "endpoint-responses",
+                "name": "Outgoing endpoint responses",
+                "tags": {},
+                "unit-plural-suffix": "responses",
+                "unit-suffix": "response",
+                "unit-type": "custom"
+              }
+            },
+            "server": {
+              "connections": {
+                "categories": [
+                  "Akka HTTP server metrics"
+                ],
+                "enabled": true,
+                "group-name": "metrics",
+                "hints": [],
+                "key": "connections",
+                "name": "Incoming connections",
+                "tags": {},
+                "unit-plural-suffix": "connections",
+                "unit-suffix": "connection",
+                "unit-type": "custom"
+              },
+              "requests": {
+                "categories": [
+                  "Akka HTTP server metrics"
+                ],
+                "enabled": true,
+                "group-name": "metrics",
+                "hints": [],
+                "key": "requests",
+                "name": "Incoming requests",
+                "tags": {},
+                "unit-plural-suffix": "requests",
+                "unit-suffix": "request",
+                "unit-type": "custom"
+              },
+              "response-time": {
+                "categories": [
+                  "Akka HTTP server metrics"
+                ],
+                "enabled": true,
+                "group-name": "metrics",
+                "hints": [],
+                "key": "response-time",
+                "name": "Outgoing response time",
+                "tags": {},
+                "unit-plural-suffix": "",
+                "unit-suffix": "",
+                "unit-type": "nanoseconds"
+              },
+              "response-time-2xx": {
+                "categories": [
+                  "Akka HTTP server metrics"
+                ],
+                "enabled": true,
+                "group-name": "metrics",
+                "hints": [],
+                "key": "response-time-2xx",
+                "name": "Outgoing response time 2xx",
+                "tags": {},
+                "unit-plural-suffix": "",
+                "unit-suffix": "",
+                "unit-type": "nanoseconds"
+              },
+              "response-time-3xx": {
+                "categories": [
+                  "Akka HTTP server metrics"
+                ],
+                "enabled": true,
+                "group-name": "metrics",
+                "hints": [],
+                "key": "response-time-3xx",
+                "name": "Outgoing response time 3xx",
+                "tags": {},
+                "unit-plural-suffix": "",
+                "unit-suffix": "",
+                "unit-type": "nanoseconds"
+              },
+              "response-time-4xx": {
+                "categories": [
+                  "Akka HTTP server metrics"
+                ],
+                "enabled": true,
+                "group-name": "metrics",
+                "hints": [],
+                "key": "response-time-4xx",
+                "name": "Outgoing response time 4xx",
+                "tags": {},
+                "unit-plural-suffix": "",
+                "unit-suffix": "",
+                "unit-type": "nanoseconds"
+              },
+              "response-time-5xx": {
+                "categories": [
+                  "Akka HTTP server metrics"
+                ],
+                "enabled": true,
+                "group-name": "metrics",
+                "hints": [],
+                "key": "response-time-5xx",
+                "name": "Outgoing response time 5xx",
+                "tags": {},
+                "unit-plural-suffix": "",
+                "unit-suffix": "",
+                "unit-type": "nanoseconds"
+              },
+              "responses": {
+                "categories": [
+                  "Akka HTTP server metrics"
+                ],
+                "enabled": true,
+                "group-name": "metrics",
+                "hints": [],
+                "key": "responses",
+                "name": "Outgoing responses",
+                "tags": {},
+                "unit-plural-suffix": "responses",
+                "unit-suffix": "response",
+                "unit-type": "custom"
+              },
+              "responses-2xx": {
+                "categories": [
+                  "Akka HTTP server metrics"
+                ],
+                "enabled": true,
+                "group-name": "metrics",
+                "hints": [],
+                "key": "responses-2xx",
+                "name": "Outgoing responses 2xx",
+                "tags": {},
+                "unit-plural-suffix": "responses",
+                "unit-suffix": "response",
+                "unit-type": "custom"
+              },
+              "responses-3xx": {
+                "categories": [
+                  "Akka HTTP server metrics"
+                ],
+                "enabled": true,
+                "group-name": "metrics",
+                "hints": [],
+                "key": "responses-3xx",
+                "name": "Outgoing responses 3xx",
+                "tags": {},
+                "unit-plural-suffix": "responses",
+                "unit-suffix": "response",
+                "unit-type": "custom"
+              },
+              "responses-4xx": {
+                "categories": [
+                  "Akka HTTP server metrics"
+                ],
+                "enabled": true,
+                "group-name": "metrics",
+                "hints": [],
+                "key": "responses-4xx",
+                "name": "Outgoing responses 4xx",
+                "tags": {},
+                "unit-plural-suffix": "responses",
+                "unit-suffix": "response",
+                "unit-type": "custom"
+              },
+              "responses-5xx": {
+                "categories": [
+                  "Akka HTTP server metrics"
+                ],
+                "enabled": true,
+                "group-name": "metrics",
+                "hints": [],
+                "key": "responses-5xx",
+                "name": "Outgoing responses 5xx",
+                "tags": {},
+                "unit-plural-suffix": "responses",
+                "unit-suffix": "response",
+                "unit-type": "custom"
+              }
+            }
+          },
+          "identity": {
+            "akka-http": {
+              "name": "akka-http"
+            },
+            "client": {
+              "category": "http-clients",
+              "key": "http-client",
+              "unknown-host": "hostUnknown"
+            },
+            "client-pool": {
+              "category": "client-pools",
+              "key": "client-pool"
+            },
+            "request-path": {
+              "category": "request-paths",
+              "key": "request-path"
+            },
+            "server": {
+              "category": "http-servers",
+              "key": "http-server"
+            }
+          }
+        },
+        "servers": {
+          "*:*": {
+            "paths": {
+              "*": {
+                "metrics": "on"
+              }
+            }
+          }
+        }
+      },
+      "meta": {
+        "descriptor": {
+          "actor": {
+            "actor-failure": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "events",
+              "hints": [],
+              "key": "actor-failure",
+              "name": "ActorFailure",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "none"
+            },
+            "dead-letter": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "events",
+              "hints": [],
+              "key": "dead-letter",
+              "name": "DeadLetter",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "none"
+            },
+            "dropped-messages": {
+              "categories": [
+                "Actor metrics/Actor mailbox metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "dropped-messages",
+              "name": "Dropped messages",
+              "tags": {},
+              "unit-plural-suffix": "msgs",
+              "unit-suffix": "msg",
+              "unit-type": "custom"
+            },
+            "errors": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "errors",
+              "name": "Errors",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "none"
+            },
+            "log-error": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "events",
+              "hints": [],
+              "key": "log-error",
+              "name": "LogError",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "none"
+            },
+            "log-warning": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "events",
+              "hints": [],
+              "key": "log-warning",
+              "name": "LogWarning",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "none"
+            },
+            "mailbox-size": {
+              "categories": [
+                "Actor metrics/Actor mailbox metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "mailbox-size",
+              "name": "Mailbox size",
+              "tags": {},
+              "unit-plural-suffix": "msgs",
+              "unit-suffix": "msg",
+              "unit-type": "custom"
+            },
+            "mailbox-size-limit": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "events",
+              "hints": [],
+              "key": "mailbox-size-limit",
+              "name": "MailboxSizeLimit",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "none"
+            },
+            "mailbox-time": {
+              "categories": [
+                "Actor metrics/Actor mailbox metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "mailbox-time",
+              "name": "Mailbox time",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "nanoseconds"
+            },
+            "mailbox-time-limit": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "events",
+              "hints": [],
+              "key": "mailbox-time-limit",
+              "name": "MailboxTimeLimit",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "none"
+            },
+            "persistence-persist-failed": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "events",
+              "hints": [],
+              "key": "persistence-persist-failed",
+              "name": "Persistence persist failed",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "none"
+            },
+            "persistence-persist-rejected": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "events",
+              "hints": [],
+              "key": "persistence-persist-rejected",
+              "name": "Persistence persist rejected",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "none"
+            },
+            "persistence-recovery-failed": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "events",
+              "hints": [],
+              "key": "persistence-recovery-failed",
+              "name": "Persistence recovery failed",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "none"
+            },
+            "persistence-recovery-failure-time": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "persistence-recovery-failure-time",
+              "name": "Persistence recovery failure time",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "nanoseconds"
+            },
+            "persistence-recovery-time": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "persistence-recovery-time",
+              "name": "Persistence recovery time",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "nanoseconds"
+            },
+            "processed-messages": {
+              "categories": [
+                "Actor metrics/Actor processing metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "processed-messages",
+              "name": "Processed messages",
+              "tags": {},
+              "unit-plural-suffix": "msgs",
+              "unit-suffix": "msg",
+              "unit-type": "custom"
+            },
+            "processing-time": {
+              "categories": [
+                "Actor metrics/Actor processing metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "processing-time",
+              "name": "Processing time",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "nanoseconds"
+            },
+            "processing-time-limit": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "events",
+              "hints": [],
+              "key": "processing-time-limit",
+              "name": "ProcessingTimeLimit",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "none"
+            },
+            "remote-deserialization-time": {
+              "categories": [
+                "Remote actor metrics/Remote actor received metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "remote-deserialization-time",
+              "name": "Remote deserialization time",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "nanoseconds"
+            },
+            "remote-large-message-received": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "events",
+              "hints": [],
+              "key": "remote-large-message-received",
+              "name": "Remote large message received",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "none"
+            },
+            "remote-large-message-sent": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "events",
+              "hints": [],
+              "key": "remote-large-message-sent",
+              "name": "Remote large message sent",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "none"
+            },
+            "remote-received-message-size": {
+              "categories": [
+                "Remote actor metrics/Remote actor received metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "remote-received-message-size",
+              "name": "Remote received message size",
+              "tags": {},
+              "unit-plural-suffix": "bytes",
+              "unit-suffix": "byte",
+              "unit-type": "custom"
+            },
+            "remote-received-messages": {
+              "categories": [
+                "Remote actor metrics/Remote actor received metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "remote-received-messages",
+              "name": "Remote received messages",
+              "tags": {},
+              "unit-plural-suffix": "msgs",
+              "unit-suffix": "msg",
+              "unit-type": "custom"
+            },
+            "remote-sent-message-size": {
+              "categories": [
+                "Remote actor metrics/Remote actor sent metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "remote-sent-message-size",
+              "name": "Remote sent message size",
+              "tags": {},
+              "unit-plural-suffix": "bytes",
+              "unit-suffix": "byte",
+              "unit-type": "custom"
+            },
+            "remote-sent-messages": {
+              "categories": [
+                "Remote actor metrics/Remote actor sent metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "remote-sent-messages",
+              "name": "Remote sent messages",
+              "tags": {},
+              "unit-plural-suffix": "msgs",
+              "unit-suffix": "msg",
+              "unit-type": "custom"
+            },
+            "remote-serialization-time": {
+              "categories": [
+                "Remote actor metrics/Remote actor sent metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "remote-serialization-time",
+              "name": "Remote serialization time",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "nanoseconds"
+            },
+            "running-actors": {
+              "categories": [
+                "Actor metrics/Actor processing metrics",
+                "Actor metrics/Actor mailbox metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "running-actors",
+              "name": "Actors (running)",
+              "tags": {},
+              "unit-plural-suffix": "actors",
+              "unit-suffix": "actor",
+              "unit-type": "custom"
+            },
+            "sent-messages": {
+              "categories": [
+                "Actor metrics/Actor sent metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "sent-messages",
+              "name": "Sent messages",
+              "tags": {},
+              "unit-plural-suffix": "msgs",
+              "unit-suffix": "msg",
+              "unit-type": "custom"
+            },
+            "stash-size": {
+              "categories": [
+                "Actor metrics/Actor stash metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "stash-size",
+              "name": "Stash size",
+              "tags": {},
+              "unit-plural-suffix": "msgs",
+              "unit-suffix": "msg",
+              "unit-type": "custom"
+            },
+            "stash-size-limit": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "events",
+              "hints": [],
+              "key": "stash-size-limit",
+              "name": "StashSizeLimit",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "none"
+            },
+            "unhandled-message": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "events",
+              "hints": [],
+              "key": "unhandled-message",
+              "name": "UnhandledMessage",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "none"
+            },
+            "warnings": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "warnings",
+              "name": "Warnings",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "none"
+            }
+          },
+          "custom-events": {
+            "group-name": "events"
+          },
+          "custom-metrics": {
+            "group-name": "metrics"
+          },
+          "dispatcher": {
+            "processing": {
+              "categories": [
+                "ExecutorService metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "processing",
+              "name": "Processing",
+              "tags": {},
+              "unit-plural-suffix": "tasks",
+              "unit-suffix": "task",
+              "unit-type": "custom"
+            },
+            "processing-time": {
+              "categories": [
+                "ExecutorService metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "processing-time",
+              "name": "Processing time",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "nanoseconds"
+            },
+            "queue-size": {
+              "categories": [
+                "ExecutorService metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "queue-size",
+              "name": "Queue size",
+              "tags": {},
+              "unit-plural-suffix": "tasks",
+              "unit-suffix": "task",
+              "unit-type": "custom"
+            },
+            "queue-time": {
+              "categories": [
+                "ExecutorService metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "queue-time",
+              "name": "Queue time",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "nanoseconds"
+            }
+          },
+          "node": {
+            "cluster-current-event": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "events",
+              "hints": [],
+              "key": "cluster-current-event",
+              "name": "Cluster current event",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "none"
+            },
+            "cluster-domain-event": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "events",
+              "hints": [],
+              "key": "cluster-domain-event",
+              "name": "Cluster domain event",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "none"
+            },
+            "cluster-member-event": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "events",
+              "hints": [],
+              "key": "cluster-member-event",
+              "name": "Cluster member event",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "none"
+            },
+            "cluster-singleton-event": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "events",
+              "hints": [],
+              "key": "cluster-singleton-event",
+              "name": "Cluster singleton event",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "none"
+            },
+            "node-quarantined-event": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "events",
+              "hints": [],
+              "key": "node-quarantined-event",
+              "name": "Node quarantined event",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "none"
+            },
+            "node-quarantines": {
+              "categories": [
+                "Remote node events"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "node-quarantines",
+              "name": "Node quarantines",
+              "tags": {},
+              "unit-plural-suffix": "events",
+              "unit-suffix": "event",
+              "unit-type": "custom"
+            },
+            "node-unable-to-join-event": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "events",
+              "hints": [],
+              "key": "node-unable-to-join-event",
+              "name": "Node unable to join event",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "none"
+            },
+            "phi-accrual-threshold-value": {
+              "categories": [
+                "Remote node events"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "phi-accrual-threshold-value",
+              "name": "Phi accrual thresdhold value",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "none"
+            },
+            "phi-accrual-value": {
+              "categories": [
+                "Remote node events"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "phi-accrual-value",
+              "name": "Phi accrual value",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "none"
+            },
+            "reachable-nodes": {
+              "categories": [
+                "Remote node metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "reachable-nodes",
+              "name": "Reachable nodes",
+              "tags": {},
+              "unit-plural-suffix": "nodes",
+              "unit-suffix": "node",
+              "unit-type": "custom"
+            },
+            "split-brain-resolver-event": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "events",
+              "hints": [],
+              "key": "split-brain-resolver-event",
+              "name": "Split brain resolver event",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "none"
+            },
+            "unreachable-nodes": {
+              "categories": [
+                "Remote node metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "unreachable-nodes",
+              "name": "Unreachable nodes",
+              "tags": {},
+              "unit-plural-suffix": "nodes",
+              "unit-suffix": "node",
+              "unit-type": "custom"
+            }
+          },
+          "persistence": {
+            "recovery-permitter-max-permits-value": {
+              "categories": [
+                "Persistence metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "recovery-permitter-max-permits-value",
+              "name": "RecoveryPermitter max permits value",
+              "tags": {},
+              "unit-plural-suffix": "permits",
+              "unit-suffix": "permit",
+              "unit-type": "custom"
+            },
+            "recovery-permitter-pending-actors-value": {
+              "categories": [
+                "Persistence metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "recovery-permitter-pending-actors-value",
+              "name": "RecoveryPermitter pending actors value",
+              "tags": {},
+              "unit-plural-suffix": "actors",
+              "unit-suffix": "actor",
+              "unit-type": "custom"
+            },
+            "recovery-permitter-used-permits-value": {
+              "categories": [
+                "Persistence metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "recovery-permitter-used-permits-value",
+              "name": "RecoveryPermitter used permits value",
+              "tags": {},
+              "unit-plural-suffix": "permits",
+              "unit-suffix": "permit",
+              "unit-type": "custom"
+            }
+          },
+          "router": {
+            "router-processing-time": {
+              "categories": [
+                "Actor metrics/Router metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "router-processing-time",
+              "name": "Router processing time",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "nanoseconds"
+            },
+            "router-routed-messages": {
+              "categories": [
+                "Actor metrics/Router metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "router-routed-messages",
+              "name": "Router routed messages",
+              "tags": {},
+              "unit-plural-suffix": "msgs",
+              "unit-suffix": "msg",
+              "unit-type": "custom"
+            }
+          },
+          "shard": {
+            "shard-count-value": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "shard-count-value",
+              "name": "Shard count value",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "custom"
+            },
+            "shard-entity-count-value": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "shard-entity-count-value",
+              "name": "Shard entity count value",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "custom"
+            },
+            "shard-region-count-value": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "shard-region-count-value",
+              "name": "Shard region count value",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "custom"
+            },
+            "shard-region-event": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "events",
+              "hints": [],
+              "key": "shard-region-event",
+              "name": "Shard region event",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "none"
+            },
+            "shard-region-messages-delivered": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "shard-region-messages-delivered",
+              "name": "Shard region messages delivered",
+              "tags": {},
+              "unit-plural-suffix": "msgs",
+              "unit-suffix": "msg",
+              "unit-type": "custom"
+            },
+            "shard-region-proxy-event": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "events",
+              "hints": [],
+              "key": "shard-region-proxy-event",
+              "name": "Shard region proxy event",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "none"
+            }
+          },
+          "stopwatch": {
+            "stopwatch-active-time": {
+              "categories": [
+                "Stopwatch metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "stopwatch-active-time",
+              "name": "Stopwatch active time",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "nanoseconds"
+            },
+            "stopwatch-rate": {
+              "categories": [
+                "Stopwatch metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "stopwatch-rate",
+              "name": "Stopwatch rate",
+              "tags": {},
+              "unit-plural-suffix": "events",
+              "unit-suffix": "event",
+              "unit-type": "custom"
+            },
+            "stopwatch-time": {
+              "categories": [
+                "Stopwatch metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "stopwatch-time",
+              "name": "Stopwatch time",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "nanoseconds"
+            },
+            "stopwatch-time-limit": {
+              "categories": [],
+              "enabled": true,
+              "group-name": "events",
+              "hints": [],
+              "key": "stopwatch-time-limit",
+              "name": "StopwatchTimeLimit",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "none"
+            }
+          }
+        },
+        "identity": {
+          "actor": {
+            "category": "actors",
+            "key": "actor"
+          },
+          "address": {
+            "category": "addresses",
+            "key": "address"
+          },
+          "akka": {
+            "name": "akka"
+          },
+          "dispatcher": {
+            "category": "dispatchers",
+            "key": "dispatcher"
+          },
+          "experimental": {
+            "connection": {
+              "category": "connections",
+              "key": "connection"
+            }
+          },
+          "remote-node": {
+            "category": "remote-nodes",
+            "key": "remote-node"
+          },
+          "router": {
+            "category": "routers",
+            "key": "router"
+          },
+          "self-node": {
+            "category": "self-nodes",
+            "key": "self-node"
+          },
+          "shard": {
+            "category": "shards",
+            "key": "shard"
+          },
+          "shard-region": {
+            "category": "shard-regions",
+            "key": "shard-region"
+          },
+          "stopwatch": {
+            "category": "stopwatches",
+            "key": "stopwatch"
+          },
+          "system": {
+            "category": "systems",
+            "key": "actor-system"
+          }
+        }
+      },
+      "persistence": {
+        "events": "off",
+        "metrics": "off"
+      },
+      "remote": {
+        "failure-detector-metrics": "on",
+        "large-message-events-size": "off",
+        "serialization-timing": "on"
+      }
+    },
+    "backends": [
+      "prometheus"
+    ],
+    "core": {
+      "meta": {
+        "descriptor": {
+          "executor": {
+            "active-thread-count": {
+              "categories": [
+                "ExecutorService metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "active-threads",
+              "name": "Active thread count",
+              "tags": {},
+              "unit-plural-suffix": "threads",
+              "unit-suffix": "thread",
+              "unit-type": "custom"
+            },
+            "core-pool-size": {
+              "categories": [
+                "ExecutorService metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "core-pool-size",
+              "name": "Core pool size",
+              "tags": {},
+              "unit-plural-suffix": "threads",
+              "unit-suffix": "thread",
+              "unit-type": "custom"
+            },
+            "max-pool-size": {
+              "categories": [
+                "ExecutorService metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "max-pool-size",
+              "name": "Max pool size",
+              "tags": {},
+              "unit-plural-suffix": "threads",
+              "unit-suffix": "thread",
+              "unit-type": "custom"
+            },
+            "parallelism": {
+              "categories": [
+                "ExecutorService metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "parallelism",
+              "name": "Parallelism",
+              "tags": {},
+              "unit-plural-suffix": "",
+              "unit-suffix": "",
+              "unit-type": "none"
+            },
+            "pool-size": {
+              "categories": [
+                "ExecutorService metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "pool-size",
+              "name": "Pool size",
+              "tags": {},
+              "unit-plural-suffix": "threads",
+              "unit-suffix": "thread",
+              "unit-type": "custom"
+            },
+            "processed-task-count": {
+              "categories": [
+                "ExecutorService metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "processed-tasks",
+              "name": "Processed task count",
+              "tags": {},
+              "unit-plural-suffix": "tasks",
+              "unit-suffix": "task",
+              "unit-type": "custom"
+            },
+            "queued-task-count": {
+              "categories": [
+                "ExecutorService metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "queued-tasks",
+              "name": "Queued task count",
+              "tags": {},
+              "unit-plural-suffix": "tasks",
+              "unit-suffix": "task",
+              "unit-type": "custom"
+            },
+            "running-thread-count": {
+              "categories": [
+                "ExecutorService metrics"
+              ],
+              "enabled": true,
+              "group-name": "metrics",
+              "hints": [],
+              "key": "running-threads",
+              "name": "Runnning thread count",
+              "tags": {},
+              "unit-plural-suffix": "threads",
+              "unit-suffix": "thread",
+              "unit-type": "custom"
+            }
+          }
+        }
+      }
+    },
+    "defaults": {
+      "akka": {
+        "actors": {}
+      }
+    },
+    "deprecation": {
+      "deprecated-settings": [
+        {
+          "from-version": "2.0",
+          "path": "cinnamon.chmetrics.actors",
+          "text": "The actor configuration should be under 'cinnamon.akka.actors', not 'cinnamon.chmetrics.actors'. See: https://developer.lightbend.com/docs/cinnamon/latest/project/migration-2.0.html#actor-configuration"
+        },
+        {
+          "from-version": "2.0",
+          "path": "cinnamon.chmetrics.trace",
+          "text": "The trace configuration should be under 'cinnamon.trace', not 'cinnamon.chmetrics.trace'. See: https://developer.lightbend.com/docs/cinnamon/latest/project/migration-2.0.html#trace-configuration"
+        },
+        {
+          "from-version": "2.0",
+          "path": "cinnamon.takipi.actors",
+          "text": "The actor configuration should be under 'cinnamon.akka.actors', not 'cinnamon.takipi.actors'. See: https://developer.lightbend.com/docs/cinnamon/latest/project/migration-2.0.html#actor-configuration"
+        },
+        {
+          "from-version": "2.0",
+          "path": "cinnamon.takipi.trace",
+          "text": "The trace configuration should be under 'cinnamon.trace', not 'cinnamon.takipi.trace'. See: https://developer.lightbend.com/docs/cinnamon/latest/project/migration-2.0.html#trace-configuration"
+        },
+        {
+          "from-version": "2.3",
+          "path": "cinnamon.chmetrics.histogram.size",
+          "text": "The sliding-window reservoir size is now configured via 'cinnamon.chmetrics.histogram.sliding-window.size'. See: https://developer.lightbend.com/docs/cinnamon/latest/project/migration-2.3.html#histogram-reservoirs"
+        },
+        {
+          "from-version": "2.3",
+          "path": "cinnamon.chmetrics.histogram.time",
+          "text": "The sliding-time-window reservoir time is now configured via 'cinnamon.chmetrics.histogram.sliding-time-window.time'. See: https://developer.lightbend.com/docs/cinnamon/latest/project/migration-2.3.html#histogram-reservoirs"
+        },
+        {
+          "from-version": "2.5",
+          "path": "cinnamon.chmetrics.statsd-reporter.server-id",
+          "text": "The server identifier is now configured via 'cinnamon.host'. See: https://developer.lightbend.com/docs/cinnamon/latest/project/migration-2.5.html#host-and-application-identifiers"
+        },
+        {
+          "from-version": "2.5",
+          "path": "cinnamon.chmetrics.statsd-reporter.application-id",
+          "text": "The application identifier is now configured via 'cinnamon.application'. See: https://developer.lightbend.com/docs/cinnamon/latest/project/migration-2.5.html#host-and-application-identifiers"
+        },
+        {
+          "from-version": "2.5",
+          "path": "cinnamon.chmetrics.conductr-statsd-reporter.server-id",
+          "text": "The server identifier is now configured via 'cinnamon.host'. See: https://developer.lightbend.com/docs/cinnamon/latest/project/migration-2.5.html#host-and-application-identifiers"
+        },
+        {
+          "from-version": "2.5",
+          "path": "cinnamon.chmetrics.conductr-statsd-reporter.application-id",
+          "text": "The application identifier is now configured via 'cinnamon.application'. See: https://developer.lightbend.com/docs/cinnamon/latest/project/migration-2.5.html#host-and-application-identifiers"
+        },
+        {
+          "from-version": "2.5",
+          "path": "cinnamon.trace.thresholds",
+          "text": "Trace Span is now named Stopwatch. Thresholds are configured via 'cinnamon.stopwatch.thresholds'. See: https://developer.lightbend.com/docs/cinnamon/latest/project/migration-2.5.html#spans"
+        },
+        {
+          "from-version": "2.6",
+          "path": "cinnamon.opsclarity",
+          "text": "The OpsClarity reporter is now configured via 'cinnamon.chmetrics.opsclarity-reporter'. See: https://developer.lightbend.com/docs/cinnamon/latest/project/migration-2.6.html#opsclarity-and-datadog-reporters"
+        },
+        {
+          "from-version": "2.6",
+          "path": "cinnamon.datadog",
+          "text": "The Datadog reporter is now configured via 'cinnamon.chmetrics.datadog-reporter'. See: https://developer.lightbend.com/docs/cinnamon/latest/project/migration-2.6.html#opsclarity-and-datadog-reporters"
+        }
+      ],
+      "documentation-url": "https://developer.lightbend.com/docs/cinnamon/latest",
+      "show-deprecated-settings": true
+    },
+    "instrumentation": "on",
+    "jvm-metrics-producer": {
+      "class-loading": {
+        "category": "class-loading",
+        "metrics": "on"
+      },
+      "garbage-collection": {
+        "category": "garbage-collection",
+        "metrics": "on"
+      },
+      "memory-usage": {
+        "category": "memory-usage",
+        "metrics": "on"
+      },
+      "producer-class": "com.lightbend.cinnamon.jvmmetricsproducer.JvmMetricsProducer"
+    },
+    "meta": {
+      "events": {
+        "rate": {
+          "default": {
+            "at-most": 1,
+            "at-most-every": "0s",
+            "every": 1
+          },
+          "global": {
+            "at-most": 1,
+            "at-most-every": "0s",
+            "every": 1
+          }
+        }
+      },
+      "identity": {
+        "application": {
+          "category": "apps",
+          "key": "application"
+        },
+        "host": {
+          "category": "servers",
+          "key": "host"
+        }
+      }
+    },
+    "producers": [
+      "jvm-metrics-producer"
+    ],
+    "prometheus": {
+      "backend-class": "cinnamon.prometheus.PrometheusBackend",
+      "exporters": [
+        "http-server"
+      ],
+      "http-server": {
+        "daemon": false,
+        "exporter-class": "com.lightbend.cinnamon.prometheus.httpserver.PrometheusHttpServer",
+        "host": "0.0.0.0",
+        "port": 9001
+      },
+      "summary": {
+        "age-buckets": 5,
+        "max-age": "10m",
+        "quantiles": [
+          {
+            "error": 0.05,
+            "quantile": 0.5
+          },
+          {
+            "error": 0.01,
+            "quantile": 0.95
+          },
+          {
+            "error": 0.001,
+            "quantile": 0.99
+          }
+        ]
+      },
+      "unique-dimensions": "on",
+      "use-default-registry": "off"
+    },
+    "show-config-info": true,
+    "show-loaded-config-settings": false,
+    "stopwatch": {
+      "active-time": "on",
+      "thresholds": {}
+    }
+  },
+  "com": {
+    "lightbend": {
+      "platform-tooling": {
+        "service-discovery": {
+          "ask-timeout": "5 seconds",
+          "external-service-address-limit": 3,
+          "external-service-addresses": {},
+          "retry-delays": [
+            "100 milliseconds",
+            "500 milliseconds",
+            "1 second"
+          ]
+        },
+        "status": {
+          "health-checks": [],
+          "readiness-checks": []
+        }
+      }
+    }
+  },
+  "es": {
+    "demos": {
+      "app": {},
+      "http": {
+        "server": {
+          "host": "localhost",
+          "port": 8080,
+          "request-timeout": 5000
+        }
+      },
+      "shoppingCartManager": {
+        "number-of-shards": 20
+      }
+    }
+  },
+  "file": {
+    "encoding": {
+      "pkg": "sun.io"
+    },
+    "separator": "/"
+  },
+  "java": {
+    "awt": {
+      "graphicsenv": "sun.awt.X11GraphicsEnvironment",
+      "printerjob": "sun.print.PSPrinterJob"
+    },
+    "class": {
+      "path": "/tmp/sbt_808267b1/job-1/target/e8ac276f/shoppingcartapp_2.12-0.1.jar:/tmp/sbt_808267b1/target/6bd975dd/scala-library-2.12.6.jar:/tmp/sbt_808267b1/target/1e6f1e74/scala-java8-compat_2.12-0.8.0.jar:/tmp/sbt_808267b1/target/323964c3/reactive-streams-1.0.2.jar:/tmp/sbt_808267b1/target/c1fdf6c0/ssl-config-core_2.12-0.2.3.jar:/tmp/sbt_808267b1/target/bbce493f/scala-parser-combinators_2.12-1.1.0.jar:/tmp/sbt_808267b1/target/18ed04a0/netty-3.10.6.Final.jar:/tmp/sbt_808267b1/target/c3bcd543/akka-cluster-sharding_2.12-2.5.12.jar:/tmp/sbt_808267b1/target/ab2955b1/akka-distributed-data_2.12-2.5.12.jar:/tmp/sbt_808267b1/target/5375c38d/lmdbjava-0.6.0.jar:/tmp/sbt_808267b1/target/404bba65/jnr-ffi-2.1.6.jar:/tmp/sbt_808267b1/target/5c1149df/jffi-1.2.16.jar:/tmp/sbt_808267b1/target/3c1f0edf/jffi-1.2.16-native.jar:/tmp/sbt_808267b1/target/dcc2193d/asm-5.0.3.jar:/tmp/sbt_808267b1/target/a7111830/asm-commons-5.0.3.jar:/tmp/sbt_808267b1/target/287749b4/asm-tree-5.0.3.jar:/tmp/sbt_808267b1/target/c7126ade/asm-analysis-5.0.3.jar:/tmp/sbt_808267b1/target/1512e557/asm-util-5.0.3.jar:/tmp/sbt_808267b1/target/006936bb/jnr-x86asm-1.0.2.jar:/tmp/sbt_808267b1/target/33f23994/jnr-constants-0.9.9.jar:/tmp/sbt_808267b1/target/e280004f/akka-persistence_2.12-2.5.12.jar:/tmp/sbt_808267b1/target/582b7790/akka-cluster-tools_2.12-2.5.12.jar:/tmp/sbt_808267b1/target/99a65a16/akka-http_2.12-10.1.3.jar:/tmp/sbt_808267b1/target/4afd52ac/akka-http-core_2.12-10.1.3.jar:/tmp/sbt_808267b1/target/701ff0a8/akka-parsing_2.12-10.1.3.jar:/tmp/sbt_808267b1/target/819f58e8/akka-http-spray-json_2.12-10.1.3.jar:/tmp/sbt_808267b1/target/0f9e8157/spray-json_2.12-1.3.4.jar:/tmp/sbt_808267b1/target/985acf0a/akka-slf4j_2.12-2.5.12.jar:/tmp/sbt_808267b1/target/da76ca59/slf4j-api-1.7.25.jar:/tmp/sbt_808267b1/target/299ca052/akka-split-brain-resolver_2.12-1.1.2.jar:/tmp/sbt_808267b1/target/a4d3cc6a/aeron-driver-1.9.1.jar:/tmp/sbt_808267b1/target/923b85df/aeron-client-1.9.1.jar:/tmp/sbt_808267b1/target/e070aebb/agrona-0.9.17.jar:/tmp/sbt_808267b1/target/437039e3/cinnamon-akka_2.12-2.10.0.jar:/tmp/sbt_808267b1/target/2f1ad7ab/cinnamon-scala_2.12-2.10.0.jar:/tmp/sbt_808267b1/target/a8eec23f/cinnamon-core_2.12-2.10.0.jar:/tmp/sbt_808267b1/target/035b6bff/cinnamon-common-2.10.0.jar:/tmp/sbt_808267b1/target/3f0a58ab/cinnamon-akka-http_2.12-2.10.0.jar:/tmp/sbt_808267b1/target/6eda1ebd/cinnamon-prometheus-httpserver_2.12-2.10.0.jar:/tmp/sbt_808267b1/target/22ab5bb6/cinnamon-prometheus_2.12-2.10.0.jar:/tmp/sbt_808267b1/target/56f8b574/simpleclient-0.1.0.jar:/tmp/sbt_808267b1/target/6ec50e0e/simpleclient_httpserver-0.1.0.jar:/tmp/sbt_808267b1/target/2e9382da/simpleclient_common-0.1.0.jar:/tmp/sbt_808267b1/target/7db68f24/cinnamon-jvm-metrics-producer_2.12-2.10.0.jar:/tmp/sbt_808267b1/target/7c4f3c47/logback-classic-1.2.3.jar:/tmp/sbt_808267b1/target/86434440/logback-core-1.2.3.jar:/tmp/sbt_808267b1/target/ed74e127/reactive-lib-akka-cluster-bootstrap_2.12-0.9.0.jar:/tmp/sbt_808267b1/target/dfa863d5/reactive-lib-akka-management_2.12-0.9.0.jar:/tmp/sbt_808267b1/target/9acfc1bf/reactive-lib-common_2.12-0.9.0.jar:/tmp/sbt_808267b1/target/4e9b08dd/akka-management_2.12-0.17.0.jar:/tmp/sbt_808267b1/target/981f7696/akka-stream_2.12-2.5.14.jar:/tmp/sbt_808267b1/target/9e8c4db1/akka-actor_2.12-2.5.14.jar:/tmp/sbt_808267b1/target/4b68c2d5/config-1.3.3.jar:/tmp/sbt_808267b1/target/4d35b3e5/akka-protobuf_2.12-2.5.14.jar:/tmp/sbt_808267b1/target/50df54ac/reactive-lib-service-discovery_2.12-0.9.0.jar:/tmp/sbt_808267b1/target/e5e1e35e/reactive-lib-async-dns_2.12-0.9.0.jar:/tmp/sbt_808267b1/target/a72364e8/reactive-lib-status_2.12-0.9.0.jar:/tmp/sbt_808267b1/target/bd4b4f90/akka-discovery-kubernetes-api_2.12-0.17.0.jar:/tmp/sbt_808267b1/target/27fc0624/akka-discovery_2.12-0.17.0.jar:/tmp/sbt_808267b1/target/6af19030/akka-discovery-marathon-api_2.12-0.17.0.jar:/tmp/sbt_808267b1/target/a319371c/akka-management-cluster-bootstrap_2.12-0.17.0.jar:/tmp/sbt_808267b1/target/bf6addbd/akka-cluster_2.12-2.5.14.jar:/tmp/sbt_808267b1/target/f18b6aab/akka-remote_2.12-2.5.14.jar:/home/alann/.ivy2/cache/com.lightbend.cinnamon/cinnamon-agent/jars/cinnamon-agent-2.10.0.jar",
+      "version": "52.0"
+    },
+    "endorsed": {
+      "dirs": "/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/endorsed"
+    },
+    "ext": {
+      "dirs": "/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext:/usr/java/packages/lib/ext"
+    },
+    "home": "/usr/lib/jvm/java-8-openjdk-amd64/jre",
+    "io": {
+      "tmpdir": "/tmp"
+    },
+    "library": {
+      "path": "/usr/java/packages/lib/amd64:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib"
+    },
+    "runtime": {
+      "name": "OpenJDK Runtime Environment",
+      "version": "1.8.0_171-8u171-b11-0ubuntu0.16.04.1-b11"
+    },
+    "specification": {
+      "name": "Java Platform API Specification",
+      "vendor": "Oracle Corporation",
+      "version": "1.8"
+    },
+    "vendor": {
+      "url": {
+        "bug": "http://bugreport.sun.com/bugreport/"
+      }
+    },
+    "version": "1.8.0_171",
+    "vm": {
+      "info": "mixed mode",
+      "name": "OpenJDK 64-Bit Server VM",
+      "specification": {
+        "name": "Java Virtual Machine Specification",
+        "vendor": "Oracle Corporation",
+        "version": "1.8"
+      },
+      "vendor": "Oracle Corporation",
+      "version": "25.171-b11"
+    }
+  },
+  "line": {
+    "separator": "\n"
+  },
+  "os": {
+    "arch": "amd64",
+    "name": "Linux",
+    "version": "4.4.0-17134-Microsoft"
+  },
+  "path": {
+    "separator": ":"
+  },
+  "shopping-session-dispatcher": {
+    "executor": "thread-pool-executor",
+    "type": "PinnedDispatcher"
+  },
+  "ssl-config": {
+    "checkRevocation": null,
+    "debug": {
+      "all": false,
+      "certpath": false,
+      "data": false,
+      "defaultctx": false,
+      "handshake": false,
+      "keygen": false,
+      "keymanager": false,
+      "ocsp": false,
+      "packet": false,
+      "plaintext": false,
+      "pluggability": false,
+      "record": false,
+      "session": false,
+      "sessioncache": false,
+      "ssl": false,
+      "sslctx": false,
+      "trustmanager": false,
+      "verbose": false
+    },
+    "default": false,
+    "disabledKeyAlgorithms": [
+      "RSA keySize < 2048",
+      "DSA keySize < 2048",
+      "EC keySize < 224"
+    ],
+    "disabledSignatureAlgorithms": [
+      "MD2",
+      "MD4",
+      "MD5"
+    ],
+    "enabledCipherSuites": [],
+    "enabledProtocols": [
+      "TLSv1.2",
+      "TLSv1.1",
+      "TLSv1"
+    ],
+    "hostnameVerifierClass": null,
+    "keyManager": {
+      "algorithm": null,
+      "prototype": {
+        "stores": {
+          "data": null,
+          "password": null,
+          "path": null,
+          "type": null
+        }
+      },
+      "stores": []
+    },
+    "logger": "com.typesafe.sslconfig.util.NoopLogger",
+    "loose": {
+      "acceptAnyCertificate": false,
+      "allowLegacyHelloMessages": null,
+      "allowUnsafeRenegotiation": null,
+      "allowWeakCiphers": false,
+      "allowWeakProtocols": false,
+      "disableHostnameVerification": false,
+      "disableSNI": false
+    },
+    "protocol": "TLSv1.2",
+    "revocationLists": [],
+    "sslParameters": {
+      "clientAuth": "default",
+      "protocols": []
+    },
+    "trustManager": {
+      "algorithm": null,
+      "prototype": {
+        "stores": {
+          "data": null,
+          "path": null,
+          "type": null
+        }
+      },
+      "stores": []
+    }
+  },
+  "sun": {
+    "arch": {
+      "data": {
+        "model": "64"
+      }
+    },
+    "boot": {
+      "class": {
+        "path": "/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/resources.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jsse.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jce.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/charsets.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jfr.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/classes"
+      },
+      "library": {
+        "path": "/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64"
+      }
+    },
+    "cpu": {
+      "endian": "little",
+      "isalist": ""
+    },
+    "io": {
+      "unicode": {
+        "encoding": "UnicodeLittle"
+      }
+    },
+    "java": {
+      "command": "com.lightbend.esdemos.ShoppingCartApp",
+      "launcher": "SUN_STANDARD"
+    },
+    "jnu": {
+      "encoding": "UTF-8"
+    },
+    "management": {
+      "compiler": "HotSpot 64-Bit Tiered Compilers"
+    },
+    "os": {
+      "patch": {
+        "level": "unknown"
+      }
+    }
+  },
+  "user": {
+    "country": "US",
+    "dir": "/mnt/e/alann/work/lightbend/dev/es-demos/shoppingcartapp",
+    "home": "/home/alann",
+    "language": "en",
+    "name": "alann",
+    "timezone": "GMT"
+  },
+  "userSim": {
+    "concurrent-users-per-node": 30,
+    "session": {
+      "cart-items-mean": 3,
+      "cart-items-stddev": 2,
+      "duration-mean-seconds": 60,
+      "duration-stddev-seconds": 30
+    }
+  }
+}
